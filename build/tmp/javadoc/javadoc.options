@@ -1,0 +1,9 @@
+-classpath 'C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\build\\classes\\java\\main;C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\build\\classes\\groovy\\main;C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\build\\resources\\main'
+-d 'C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\build\\docs\\javadoc'
+-doctitle 'TP5Gradle 1.0 API'
+-notimestamp 
+-quiet 
+-windowtitle 'TP5Gradle 1.0 API'
+'C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\src\\main\\java\\com\\example\\exception\\NoSquareException.java'
+'C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\src\\main\\java\\com\\example\\model\\Matrix.java'
+'C:\\Users\\Zbook\\IdeaProjects\\TP5Gradle\\src\\main\\java\\com\\example\\service\\MatrixMathematics.java'

@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.example",
+    "module": "TP5Gradle",
+    "version": "1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "TP5Gradle-1.0.jar",
+          "url": "TP5Gradle-1.0.jar",
+          "size": 3855,
+          "sha512": "ae27dfdf91f372658d888524fdc7eedb4686fdc6c46ba7b28fa65d0ed97ad6e75a27e3d629ba4205a1b1c34e4e95d3ac14588b8a065e635adf8c850c01f10d57",
+          "sha256": "d684930b41ba3ac1cc4d9b85b4c2bd76f51cf8cc460ebfa9b48069cd3207d4ea",
+          "sha1": "37492d7d23be7445e0c50f878b119ed930641a93",
+          "md5": "0d4e14f3f009e11c8c93cadbb6be2d10"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "TP5Gradle-1.0.jar",
+          "url": "TP5Gradle-1.0.jar",
+          "size": 3855,
+          "sha512": "ae27dfdf91f372658d888524fdc7eedb4686fdc6c46ba7b28fa65d0ed97ad6e75a27e3d629ba4205a1b1c34e4e95d3ac14588b8a065e635adf8c850c01f10d57",
+          "sha256": "d684930b41ba3ac1cc4d9b85b4c2bd76f51cf8cc460ebfa9b48069cd3207d4ea",
+          "sha1": "37492d7d23be7445e0c50f878b119ed930641a93",
+          "md5": "0d4e14f3f009e11c8c93cadbb6be2d10"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailNotifier.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TP5Gradle</a> &gt; <a href="index.source.html" class="el_package">com.example</a> &gt; <span class="el_source">MailNotifier.java</span></div><h1>MailNotifier.java</h1><pre class="source lang-java linenums">package com.example;
+
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+
+import java.util.Properties;
+
+<span class="nc" id="L9">public class MailNotifier {</span>
+
+    public static void sendNotification(String toEmail, String subject, String messageBody) {
+<span class="nc" id="L12">        final String fromEmail = &quot;inesbenguiar@gmail.com&quot;;</span>
+<span class="nc" id="L13">        final String password = &quot;123456789&quot;;</span>
+
+        // SMTP Server Properties
+<span class="nc" id="L16">        Properties props = new Properties();</span>
+<span class="nc" id="L17">        props.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L18">        props.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L19">        props.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);</span>
+<span class="nc" id="L20">        props.put(&quot;mail.smtp.port&quot;, &quot;587&quot;);</span>
+
+        // Authenticator for Gmail
+<span class="nc" id="L23">        Session session = Session.getInstance(props, new Authenticator() {</span>
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+<span class="nc" id="L26">                return new PasswordAuthentication(fromEmail, password);</span>
+            }
+        });
+
+        try {
+            // Create Email Message
+<span class="nc" id="L32">            Message message = new MimeMessage(session);</span>
+<span class="nc" id="L33">            message.setFrom(new InternetAddress(fromEmail));</span>
+<span class="nc" id="L34">            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));</span>
+<span class="nc" id="L35">            message.setSubject(subject);</span>
+<span class="nc" id="L36">            message.setText(messageBody);</span>
+
+            // Send Email
+<span class="nc" id="L39">            Transport.send(message);</span>
+<span class="nc" id="L40">            System.out.println(&quot;Notification Email Sent Successfully!&quot;);</span>
+
+<span class="nc" id="L42">        } catch (MessagingException e) {</span>
+<span class="nc" id="L43">            e.printStackTrace();</span>
+<span class="nc" id="L44">            System.err.println(&quot;Failed to send email notification: &quot; + e.getMessage());</span>
+<span class="nc" id="L45">        }</span>
+<span class="nc" id="L46">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
