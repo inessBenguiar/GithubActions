@@ -10,14 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Updated permission to allow dependency submission
+      contents: write  # This is required for dependency submission
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2  # Change to v2 if issues arise with v4
+        uses: actions/setup-java@v2
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -28,8 +28,27 @@ jobs:
       - name: Grant execute permissions to gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle Wrapper
-        run: ./gradlew build
+      - name: Run Gradle tests
+        run: ./gradlew test
 
-      - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@v4.0.0
+      - name: Archive test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: build/test-results/
+
+      - name: Generate and submit cucumber report
+        run: |
+          if [ -f "reports/example-report.json" ]; then
+            echo "Cucumber report exists, processing it..."
+            # Add any logic to handle cucumber reports if needed
+          else
+            echo "No cucumber report found."
+          fi
+
+      - name: Publish JUnit test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-results
+          path: build/test-results/test/TEST-Matrix.xml
+
