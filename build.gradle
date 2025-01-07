@@ -23,8 +23,9 @@ dependencies {
 sonarqube {
     properties {
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : ""
         property "sonar.organization", "your_organization_key"  // Remplacez ceci par le nom de votre organisation SonarCloud
+      property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN")
+
     }
 }
 
