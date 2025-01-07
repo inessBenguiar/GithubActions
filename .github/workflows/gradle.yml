@@ -152,12 +152,21 @@ jobs:
           from: GitHub Actions
           content_type: text/plain
 
-      - name: Slack:Send to Slack
-        uses: slackapi/slack-github-action@v2.0.0
+      - name: Slack: Send to Slack
+        uses: slackapi/slack-github-action@v1
         with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          message: 'Pipeline Successful'
-          color: '#36a64f' 
+          payload: |
+            {
+              "channel": "#general",
+              "text": "Pipeline Successful",
+              "attachments": [
+                {
+                  "color": "#36a64f",
+                  "text": "The pipeline has been successfully completed."
+                }
+              ]
+            }
+       
 
             
 
