@@ -2,6 +2,7 @@ plugins {
   id 'groovy'
   id 'jacoco'
   id 'maven-publish'
+  id "org.sonarqube" version "3.3"
 }
 
 group 'com.example'
@@ -18,4 +19,12 @@ dependencies {
   testImplementation 'junit:junit:4.12'
   testImplementation 'junit:junit:4.13.1'
 }
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : ""
+    }
+}
+
 
