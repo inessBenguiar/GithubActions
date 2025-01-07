@@ -15,23 +15,21 @@ repositories {
 dependencies {
   testImplementation 'io.cucumber:cucumber-java:6.0.0'
   testImplementation 'io.cucumber:cucumber-junit:6.0.0'
-  testImplementation 'junit:junit:4.12'
   testImplementation 'junit:junit:4.13.1'
 }
 
 sonarqube {
     properties {
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.organization", "inessbenguiar"  
-        property "sonar.projectKey", "inessBenguiar_GitActions-test"  
-        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN") 
-        property "sonar.sources", "src/main/java"  
-        property "sonar.tests", "src/test/java"    
-        property "sonar.java.binaries", "build/classes/java/main" 
+        property "sonar.organization", "inessbenguiar"
+        property "sonar.projectKey", "inessBenguiar_GitActions-test"
+        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN")
+        property "sonar.sources", "src/main/java"
+        property "sonar.tests", "src/test/java"
+        property "sonar.java.binaries", "build/classes/java/main"
         property "sonar.report.export.path", "build/sonar-report/sonar-report.json"
     }
 }
-
 
 publishing {
   publications {
@@ -46,9 +44,10 @@ publishing {
     maven {
       url = uri("https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/")
       credentials {
-        username = 'myMavenRepo'
-        password = '123456'
+        username = project.hasProperty("repoUsername") ? project.repoUsername : System.getenv("REPO_USERNAME")
+        password = project.hasProperty("repoPassword") ? project.repoPassword : System.getenv("REPO_PASSWORD")
       }
     }
   }
 }
+
