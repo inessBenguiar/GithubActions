@@ -44,7 +44,10 @@ jobs:
         with:
           name: cucumber-report
           path: reports/example-report.json
-
+          
+      # Étape 7 : Vérifier si les artefacts ont bien été créés
+      - name: List build directory for verification
+        run: ls -R build/
 
       - name: Publish JUnit test results
         uses: actions/upload-artifact@v3
