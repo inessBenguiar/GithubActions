@@ -130,5 +130,27 @@ jobs:
           MYMAVENREPO_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MYMAVENREPO_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
+      - name: Slack notification
+        uses: slackapi/slack-github-action@v1
+        with:
+          slack-message: ${{ github.workflow }} workflow ${{ job.status }}.
+          View the run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Send email notification on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "Workflow ${{ github.workflow }} failed"
+          body: "The workflow ${{ github.workflow }} has failed. View the run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          to: ${{ secrets.EMAIL_TO }}
+          from: GitHub Actions
+          content_type: text/plain
+
      
 
