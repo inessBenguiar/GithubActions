@@ -28,5 +28,6 @@ sonarqube {
         property "sonar.sources", "src/main/java"  // Replace with your source directory if different
         property "sonar.tests", "src/test/java"    // Replace with your test directory if different
         property "sonar.java.binaries", "build/classes/java/main" // Ensure the location of compiled Java classes
+        property "sonar.report.export.path", "build/sonar-report/sonar-report.json"
     }
 }
