@@ -117,21 +117,3 @@ jobs:
           name: build-docs
           path: build/docs/
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Grant execute permissions to gradlew
-        run: chmod +x ./gradlew
-
-      - name: Publish to Maven
-        run: ./gradlew publish
-        env:
-          REPO_USERNAME: ${{ secrets.REPO_USERNAME }}
-          REPO_PASSWORD: ${{ secrets.REPO_PASSWORD }}
-
-
