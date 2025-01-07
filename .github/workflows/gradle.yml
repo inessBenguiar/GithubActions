@@ -152,7 +152,7 @@ jobs:
           from: GitHub Actions
           content_type: text/plain
 
-      - name: Slack: Send to Slack
+      - name: Send to Slack
         uses: slackapi/slack-github-action@v1
         with:
           payload: |
