@@ -121,13 +121,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      # Print working directory again for deploy
-      - name: Print working directory
-        run: pwd
-
-      # List files in the current directory
-      - name: List all files in the current directory
-        run: ls -la
 
       # Publish with Gradle
       - name: Deploy with Gradle
