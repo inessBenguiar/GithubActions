@@ -46,10 +46,10 @@ repositories {
 publishing {
     repositories {
         maven {
-            url "https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/"
+            url "https://mymavenrepo.com/repo/bLlXO4g2mfq6MLPc0mpj/"
             credentials {
                 username = 'myMavenRepo'
-                password = '123456'
+                password = 'safa'
             }
 
         }
