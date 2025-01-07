@@ -8,17 +8,6 @@ plugins {
 group 'com.example'
 version '1.0'
 
-repositories {
-    mavenCentral()
-    maven {
-        url "https://mymavenrepo.com/repo/1pktSSWp2KvLwohfVC91/"
-        credentials {
-            username = 'myMavenRepo'
-            password = '123456'
-        }
-    }
-}
-
 dependencies {
     testImplementation 'io.cucumber:cucumber-java:6.0.0'
     testImplementation 'io.cucumber:cucumber-junit:6.0.0'
@@ -39,20 +28,23 @@ sonarqube {
     }
 }
 
-publishing {
-    repositories {
-        maven {
-            url "https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/"
-            credentials {
-                username = project.findProperty("repo.username") ?: System.getenv("REPO_USERNAME")
-                password = project.findProperty("repo.password") ?: System.getenv("REPO_PASSWORD")
-            }
-        }
-    }
 
-    publications {
-        maven(MavenPublication) {
-            from components.java
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+      groupId = 'java-api'
+      artifactId = 'library'
+      version = '1.0.0'
+    }
+  }
+repositories {
+    mavenCentral()
+    maven {
+        url "https://mymavenrepo.com/repo/1pktSSWp2KvLwohfVC91/"
+        credentials {
+            username = 'myMavenRepo'
+            password = '123456'
         }
     }
 }
