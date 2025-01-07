@@ -49,9 +49,14 @@ jobs:
       - name: List build directory for verification
         run: ls -R build/
         
-     # Analyser le code avec SonarQube
+       # Étape 6 : Analyser le code avec SonarQube
       - name: Run SonarQube Analysis
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Utilisation du token secret
-        run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Ajoutez votre token SonarQube dans GitHub Secrets
+        run: ./gradlew sonarqube
 
+      # Étape 7 : Télécharger les artefacts générés par SonarQube
+      - name: Upload SonarQube reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: sonar-reports
