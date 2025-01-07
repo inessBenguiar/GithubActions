@@ -22,9 +22,9 @@ dependencies {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "safa-SAFSAFI_GithubActions"
-        property "sonar.organization", "safa-safsafi"
         property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.organization", "inessbenguiar"
+        property "sonar.projectKey", "inessBenguiar_GitActions-test"
         property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN")
         property "sonar.sources", "src/main/java"
         property "sonar.tests", "src/test/java"
@@ -32,7 +32,6 @@ sonarqube {
         property "sonar.report.export.path", "build/sonar-report/sonar-report.json"
     }
 }
-
 
 repositories {
     maven {
