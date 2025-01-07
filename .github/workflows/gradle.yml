@@ -117,3 +117,14 @@ jobs:
           name: build-docs
           path: build/docs/
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: quality_gate
+    steps:
+      - name: deploy-file
+        run: ./gradlew publish
+        env:
+          MYMAVENREPO_USERNAME: ${{ secrets.MYMAVENREPO_USERNAME }}
+          MYMAVENREPO_PASSWORD: ${{ secrets.REPO_PASS }}
+
+
