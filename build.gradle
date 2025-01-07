@@ -44,8 +44,8 @@ publishing {
         maven {
             url "https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/"
             credentials {
-                username = 'myMavenRepo'
-                password = '123456'
+                username = project.findProperty("repo.username") ?: System.getenv("REPO_USERNAME")
+                password = project.findProperty("repo.password") ?: System.getenv("REPO_PASSWORD")
             }
         }
     }
@@ -56,3 +56,4 @@ publishing {
         }
     }
 }
+
