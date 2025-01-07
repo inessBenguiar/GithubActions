@@ -53,7 +53,7 @@ jobs:
       - name: Run SonarQube Analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Ajoutez votre token SonarQube dans GitHub Secrets
-        run: ./gradlew sonarqube
+        run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
       # Étape 7 : Télécharger les artefacts générés par SonarQube
       - name: Upload SonarQube reports
