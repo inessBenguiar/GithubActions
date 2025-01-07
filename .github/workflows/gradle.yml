@@ -152,20 +152,11 @@ jobs:
           from: GitHub Actions
           content_type: text/plain
 
-      - name: Send to Slack
-        uses: slackapi/slack-github-action@v1
+      - name: Slack Notification
+        uses: bryannice/gitactions-slack-notification@2.0.0
         with:
-          payload: |
-            {
-              "channel": "#general",
-              "text": "Pipeline Successful",
-              "attachments": [
-                {
-                  "color": "#36a64f",
-                  "text": "The pipeline has been successfully completed."
-                }
-              ]
-            }
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          message: "Build has completed successfully!"
        
 
             
