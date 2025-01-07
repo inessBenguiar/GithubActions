@@ -152,5 +152,14 @@ jobs:
           from: GitHub Actions
           content_type: text/plain
 
+      - name: Slack Post
+        uses: devtk0582/slack-post-action@v1.2
+        with:
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          message: 'Pipeline Successful'
+          color: '#36a64f' 
+
+            
+
      
 
