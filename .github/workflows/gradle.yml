@@ -152,8 +152,8 @@ jobs:
           from: GitHub Actions
           content_type: text/plain
 
-      - name: Slack Post
-        uses: devtk0582/slack-post-action@v1.2
+      - name: Slack:Send to Slack
+        uses: slackapi/slack-github-action@v2.0.0
         with:
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
           message: 'Pipeline Successful'
