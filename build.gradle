@@ -28,24 +28,24 @@ sonarqube {
     }
 }
 
-
 publishing {
-  publications {
-    mavenJava(MavenPublication) {
-      from components.java
-      groupId = 'java-api'
-      artifactId = 'library'
-      version = '1.0.0'
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId = 'java-api'
+            artifactId = 'library'
+            version = '1.0.0'
+        }
     }
-  }
-repositories {
-    mavenCentral()
-    maven {
-        url "https://mymavenrepo.com/repo/1pktSSWp2KvLwohfVC91/"
-        credentials {
-            username = 'myMavenRepo'
-            password = '123456'
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://mymavenrepo.com/repo/1pktSSWp2KvLwohfVC91/"
+            credentials {
+                username = 'myMavenRepo'
+                password = '123456'
+            }
         }
     }
 }
-
