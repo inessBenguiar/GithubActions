@@ -1,18 +1,22 @@
 plugins {
-    id 'groovy'
-    id 'jacoco'
-    id 'maven-publish'
-    id "org.sonarqube" version "3.3"
+  id 'groovy'
+  id 'jacoco'
+  id 'maven-publish'
+  id "org.sonarqube" version "3.3"
 }
 
 group 'com.example'
 version '1.0'
 
+repositories {
+  mavenCentral()
+}
+
 dependencies {
-    testImplementation 'io.cucumber:cucumber-java:6.0.0'
-    testImplementation 'io.cucumber:cucumber-junit:6.0.0'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'junit:junit:4.13.1'
+  testImplementation 'io.cucumber:cucumber-java:6.0.0'
+  testImplementation 'io.cucumber:cucumber-junit:6.0.0'
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'junit:junit:4.13.1'
 }
 
 sonarqube {
@@ -20,32 +24,10 @@ sonarqube {
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.organization", "inessbenguiar"  
         property "sonar.projectKey", "inessBenguiar_GitActions-test"  
-        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN")
+        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN") 
         property "sonar.sources", "src/main/java"  
         property "sonar.tests", "src/test/java"    
         property "sonar.java.binaries", "build/classes/java/main" 
-        property "sonar.report.export.path", "build/sonar-report/sonar-report.json"  // Path to SonarQube report
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId = 'java-api'
-            artifactId = 'library'
-            version = '1.0.0'
-        }
-    }
-
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://mymavenrepo.com/repo/1pktSSWp2KvLwohfVC91/"
-            credentials {
-                username = 'myMavenRepo'
-                password = '123456'
-            }
-        }
+        property "sonar.report.export.path", "build/sonar-report/sonar-report.json"
     }
 }
