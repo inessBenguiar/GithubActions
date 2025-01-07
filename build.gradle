@@ -1,22 +1,29 @@
 plugins {
-  id 'groovy'
-  id 'jacoco'
-  id 'maven-publish'
-  id "org.sonarqube" version "3.3"
+    id 'groovy'
+    id 'jacoco'
+    id 'maven-publish'
+    id "org.sonarqube" version "3.3"
 }
 
 group 'com.example'
 version '1.0'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
+    maven {
+        url "https://mymavenrepo.com/repo/Z5cXHxCOH2SYLwLv7btf/"
+        credentials {
+            username = 'myMavenRepo'
+            password = '123456789'
+        }
+    }
 }
 
 dependencies {
-  testImplementation 'io.cucumber:cucumber-java:6.0.0'
-  testImplementation 'io.cucumber:cucumber-junit:6.0.0'
-  testImplementation 'junit:junit:4.12'
-  testImplementation 'junit:junit:4.13.1'
+    testImplementation 'io.cucumber:cucumber-java:6.0.0'
+    testImplementation 'io.cucumber:cucumber-junit:6.0.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
 }
 
 sonarqube {
@@ -28,34 +35,25 @@ sonarqube {
         property "sonar.sources", "src/main/java"  
         property "sonar.tests", "src/test/java"    
         property "sonar.java.binaries", "build/classes/java/main" 
-        property "sonar.report.export.path", "build/sonar-report/sonar-report.json"
+        property "sonar.report.export.path", "build/sonar-report/sonar-report.json"  // Path to SonarQube report
     }
-}
-
-repositories {
-  maven {
-    url "https://mymavenrepo.com/repo/Z5cXHxCOH2SYLwLv7btf/"
-    credentials {
-      username = 'myMavenRepo'
-      password = '123456789'
-    }
-  }
 }
 
 publishing {
-  repositories {
-    maven {
-      url "https://mymavenrepo.com/repo/Z5cXHxCOH2SYLwLv7btf/"
-      credentials {
-        username = 'myMavenRepo'
-        password = '123456789'
-      }
+    repositories {
+        maven {
+            url "https://mymavenrepo.com/repo/Z5cXHxCOH2SYLwLv7btf/"
+            credentials {
+                username = 'myMavenRepo'
+                password = '123456789'
+            }
+        }
     }
-  }
 
-  publications {
-    maven(MavenPublication) {
-      from components.java
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
     }
-  }
 }
+
