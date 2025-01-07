@@ -60,10 +60,4 @@ jobs:
         with:
           name: junit-results
 
-      # Télécharger les artefacts générés par SonarQube
-      - name: Upload SonarQube reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: sonar-reports
-          path: build/sonar-report
 
