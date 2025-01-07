@@ -121,6 +121,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Grant execute permissions to gradlew
+        run: chmod +x ./gradlew
+
       # Run the Gradle publish task
       - name: Run Gradle publish
         run: ./gradlew publish
