@@ -11,10 +11,10 @@ version '1.0'
 repositories {
     mavenCentral()
     maven {
-        url "https://mymavenrepo.com/repo/Z5cXHxCOH2SYLwLv7btf/"
+        url "https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/"
         credentials {
             username = 'myMavenRepo'
-            password = '123456789'
+            password = '123456'
         }
     }
 }
@@ -42,10 +42,10 @@ sonarqube {
 publishing {
     repositories {
         maven {
-            url "https://mymavenrepo.com/repo/Z5cXHxCOH2SYLwLv7btf/"
+            url "https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/"
             credentials {
                 username = 'myMavenRepo'
-                password = '123456789'
+                password = '123456'
             }
         }
     }
