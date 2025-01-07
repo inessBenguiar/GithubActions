@@ -153,10 +153,12 @@ jobs:
           content_type: text/plain
 
       - name: Slack Notification
-        uses: bryannice/gitactions-slack-notification@2.0.0
+        uses: slackapi/slack-github-action@v1
         with:
-          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          message: "Build has completed successfully!"
+          slack-message: "Build has completed successfully!"
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-token: ${{ secrets.SLACK_TOKEN }}
+
 
        
 
