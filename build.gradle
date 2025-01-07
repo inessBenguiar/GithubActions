@@ -12,7 +12,6 @@ repositories {
   mavenCentral()
 }
 
-
 dependencies {
   testImplementation 'io.cucumber:cucumber-java:6.0.0'
   testImplementation 'io.cucumber:cucumber-junit:6.0.0'
@@ -23,10 +22,11 @@ dependencies {
 sonarqube {
     properties {
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.organization", "your_organization_key"  // Remplacez ceci par le nom de votre organisation SonarCloud
-      property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN")
-
+        property "sonar.organization", "inessbenguiar"  // Replace with your SonarCloud organization name
+        property "sonar.projectKey", "inessBenguiar_GitActions-test"  // Replace with your project key
+        property "sonar.login", project.hasProperty("sonar.login") ? project.sonar.login : System.getenv("SONAR_TOKEN") // Make sure your token is set as an environment variable
+        property "sonar.sources", "src/main/java"  // Replace with your source directory if different
+        property "sonar.tests", "src/test/java"    // Replace with your test directory if different
+        property "sonar.java.binaries", "build/classes/java/main" // Ensure the location of compiled Java classes
     }
 }
-
-
