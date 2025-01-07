@@ -31,3 +31,24 @@ sonarqube {
         property "sonar.report.export.path", "build/sonar-report/sonar-report.json"
     }
 }
+
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+      groupId = 'java-api'
+      artifactId = 'library'
+      version = '1.0.0'
+    }
+  }
+  repositories {
+    maven {
+      url = uri("https://mymavenrepo.com/repo/OicFqjk9VQHWOORIIncj/")
+      credentials {
+        username = 'myMavenRepo'
+        password = '123456'
+      }
+    }
+  }
+}
