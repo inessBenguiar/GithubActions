@@ -37,7 +37,7 @@ jobs:
           name: junit-results
           path: build/test-results/test/
 
-      # Archiver le rapport Cucumber 
+      # Archiver le rapport Cucumber
       - name: Archive Cucumber report (if exists)
         if: always()
         uses: actions/upload-artifact@v3
@@ -48,10 +48,22 @@ jobs:
       # Vérifier si les artefacts ont bien été créés
       - name: List build directory for verification
         run: ls -R build/
-      
-      # Étape 7 : Télécharger les artefacts générés par SonarQube
+
+  QualityGate:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      # Récupérer les artefacts du job précédent si nécessaire
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: junit-results
+
+      # Télécharger les artefacts générés par SonarQube
       - name: Upload SonarQube reports
         uses: actions/upload-artifact@v3
         with:
           name: sonar-reports
           path: build/sonar-report
+
