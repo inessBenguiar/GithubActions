@@ -48,4 +48,10 @@ jobs:
       # Vérifier si les artefacts ont bien été créés
       - name: List build directory for verification
         run: ls -R build/
+        
+     # Analyser le code avec SonarQube
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Utilisation du token secret
+        run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
