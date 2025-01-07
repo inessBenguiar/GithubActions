@@ -37,7 +37,7 @@ jobs:
           name: junit-results
           path: build/test-results/test/
 
-      # Archiver le rapport Cucumber 
+      # Archiver le rapport Cucumber (facultatif)
       - name: Archive Cucumber report (if exists)
         if: always()
         uses: actions/upload-artifact@v3
@@ -49,16 +49,24 @@ jobs:
       - name: List build directory for verification
         run: ls -R build/
         
-       # Étape 6 : Analyser le code avec SonarQube
-      - name: Run SonarQube Analysis
+      # Étape 6 : Analyser le code avec SonarCloud
+      - name: Run SonarCloud Analysis
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Ajoutez votre token SonarQube dans GitHub Secrets
-        run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN -Dsonar.organization=inessbenguiar -Dsonar.projectKey=inessBenguiar_GitActions-test -Dsonar.sources=src/main/java -Dsonar.tests=src/test/java -Dsonar.java.binaries=build/classes/java/main
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token ajouté dans les secrets GitHub
+        run: |
+          ./gradlew sonarqube \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.organization=inessbenguiar \
+            -Dsonar.projectKey=inessBenguiar_GitActions-test \
+            -Dsonar.sources=src/main/java \
+            -Dsonar.tests=src/test/java \
+            -Dsonar.java.binaries=build/classes/java/main
       
       # Étape 7 : Télécharger les artefacts générés par SonarQube
       - name: Upload SonarQube reports
         uses: actions/upload-artifact@v3
         with:
           name: sonar-reports
-          path: build/sonar-report
+          path: build/sonar-report  # Assurez-vous que ce chemin correspond aux rapports générés
 
