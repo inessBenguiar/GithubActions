@@ -153,11 +153,15 @@ jobs:
           content_type: text/plain
 
       - name: Slack Notification
-        uses: slackapi/slack-github-action@v1
+        if: always()
+        uses: slackapi/slack-github-action@v1.24.0
         with:
-          slack-message: "Build has completed successfully!"
-          slack-token: ${{ secrets.SLACK_WEBHOOK_URL }}
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          payload: |
+            {
+              "text": "*Workflow Status: ${{ job.status }}*\n${{ github.workflow }} workflow completed.\nRepository: ${{ github.repository }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
        
