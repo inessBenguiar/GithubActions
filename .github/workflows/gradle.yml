@@ -94,7 +94,7 @@ jobs:
       - name: Send Slack notification
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          channel-id: 'actions'
           slack-message: |
             Workflow *${{ github.workflow }}* for branch *${{ github.ref_name }}* has completed with status: *${{ job.status }}*
             Check the details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
