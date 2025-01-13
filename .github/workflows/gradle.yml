@@ -91,16 +91,15 @@ jobs:
           MYMAVENREPO_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MYMAVENREPO_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
-      - name: Slack Notification
-        if: always() 
-        uses: slackapi/slack-github-action@v1.24.0  
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v1.24.0
         with:
-          payload: |
-            {
-              "text": "*Workflow Status: ${{ job.status }}*\n${{ github.workflow }} workflow completed.\nRepository: ${{ github.repository }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
-            }
+          channel-id: ${{ secrets.SLACK_CHANNEL_ID }}
+          slack-message: |
+            Workflow *${{ github.workflow }}* for branch *${{ github.ref_name }}* has completed with status: *${{ job.status }}*
+            Check the details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
 
       - name: Send email notification
         if: always() 
