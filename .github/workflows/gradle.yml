@@ -69,21 +69,6 @@ jobs:
             echo "Quality Gate failed!"
             exit 1
           fi
-          
-      # Récupérer le code source
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Configurer Java 17
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      # Ajouter Gradle Wrapper
-      - name: Grant execute permissions to gradlew
-        run: chmod +x gradlew
 
       # Exécuter la construction Gradle
       - name: Build with Gradle
@@ -106,37 +91,12 @@ jobs:
         with:
           name: build-docs
           path: build/docs/
-          
-      # Récupérer le code source
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Configurer Java 17
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-
-      # Ajouter Gradle Wrapper
-      - name: Grant execute permissions to gradlew
-        run: chmod +x gradlew
-
-
 
       - name: Déploiement du fichier jar sur myMavenRepo
         run: ./gradlew publish
         env:
           MYMAVENREPO_USERNAME: ${{ secrets.MAVEN_USERNAME }}
           MYMAVENREPO_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-
-      - name: Slack notification
-        uses: slackapi/slack-github-action@v1
-        with:
-          slack-message: ${{ github.workflow }} workflow ${{ job.status }}.
-          View the run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Slack Notification
         if: always()  # This ensures the notification is sent regardless of previous steps
