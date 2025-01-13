@@ -83,11 +83,11 @@ jobs:
           name: build-docs
           path: build/docs/
 
-  #    - name: Déploiement du fichier jar sur myMavenRepo
-   #     run: ./gradlew publish
-    #    env:
-   #       MYMAVENREPO_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-     #     MYMAVENREPO_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+      - name: Déploiement du fichier jar sur myMavenRepo
+        run: ./gradlew publish
+        env:
+          MYMAVENREPO_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MYMAVENREPO_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Slack Notification
         if: always() 
