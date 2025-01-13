@@ -47,11 +47,6 @@ jobs:
       - name: List build directory for verification
         run: ls -R build/
 
-      
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Installer jq
       - name: Install jq
         run: sudo apt-get install -y jq
 
@@ -73,18 +68,15 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      # Génerer Javadoc
       - name: Generate Javadoc
         run: ./gradlew javadoc
 
-      # Archiver les fichiers JAR
       - name: Archive JAR artifacts
         uses: actions/upload-artifact@v3
         with:
           name: build-jars
           path: build/libs/*.jar
 
-      # Archiver la documentation Javadoc
       - name: Archive Javadoc docs
         uses: actions/upload-artifact@v3
         with:
@@ -98,27 +90,26 @@ jobs:
      #     MYMAVENREPO_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Slack Notification
-        if: always()  # This ensures the notification is sent regardless of previous steps
-        uses: slackapi/slack-github-action@v1.24.0  # Specify the version
+        if: always() 
+        uses: slackapi/slack-github-action@v1.24.0  
         with:
-          # Using payload for more detailed message
           payload: |
             {
               "text": "*Workflow Status: ${{ job.status }}*\n${{ github.workflow }} workflow completed.\nRepository: ${{ github.repository }}\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}  # This is the only required secret
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
 
-      - name: Send email notification on failure
-        if: failure()
+      - name: Send email notification
+        if: always() 
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Workflow ${{ github.workflow }} failed"
-          body: "The workflow ${{ github.workflow }} has failed. View the run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          subject: "Workflow ${{ github.workflow }} Status: ${{ job.status }}" 
+          body: "The workflow ${{ github.workflow }} has completed with status: ${{ job.status }}.\nView the run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           to: ${{ secrets.EMAIL_TO }}
           from: GitHub Actions
           content_type: text/plain
