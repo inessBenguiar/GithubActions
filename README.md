@@ -29,6 +29,7 @@ Includes:
 The main pipeline is defined in:  
 ```yaml
 .github/workflows/main.yml
+```
 
 
 > 📂 You can find the Jenkins version of this pipeline here: [integration-continue](https://github.com/inessBenguiar/integration-continue)
